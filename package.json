@@ -1,5 +1,5 @@
 { "name": "ersatz-linewrap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "It somehow wraps lines at about some width.",
   "keywords": [ "line", "wrap", "ersatz", "shim" ],
 

@@ -3,7 +3,9 @@
 'use strict';
 
 module.exports = (function setup() {
-  var elw, rxBody, rpl;
+  var EX, elw, rxBody, rpl;
+
+  EX = function ersatzLineWrap(text, opt) { return elw(text, opt); };
 
   rxBody = function (rx) {
     if ((typeof rx) === 'string') { return rx; }
@@ -55,10 +57,14 @@ module.exports = (function setup() {
     }).join('\n');
     rpl.keep = null;
 
-    if (opt.unwrap) {
-      text = text.replace(new RegExp('\\n' + rxBody(opt.unwrap), 'g'), ' ');
-    }
+    text = EX.unwrap(text, opt.unwrap);
+    return text;
+  };
 
+
+  EX.unwrap = function (text, where) {
+    if (!where) { return text; }
+    text = text.replace(new RegExp('\\n' + rxBody(where), 'g'), ' ');
     return text;
   };
 
@@ -69,6 +75,5 @@ module.exports = (function setup() {
 
 
 
-
-  return function ersatzLineWrap(text, opt) { return elw(text, opt); };
+  return EX;
 }());
